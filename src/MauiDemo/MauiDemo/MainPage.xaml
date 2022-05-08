@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiDemo.MainPage">
+             x:Class="MauiDemo.MainPage"
+             xmlns:local="clr-namespace:MauiDemo">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel/>
+    </ContentPage.BindingContext>
 
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
@@ -16,15 +20,22 @@
                 Text="Start"
                 FontAttributes="Bold"
                 SemanticProperties.Hint="Starts location history"
-                Clicked="OnStartClicked"
+                Command="{Binding StartCommand}"
                 HorizontalOptions="Center" />
 
             <Button 
                 Text="Stop"
                 FontAttributes="Bold"
                 SemanticProperties.Hint="Stop location history"
-                Clicked="OnStopClicked"
+                Command="{Binding StopCommand}"
                 HorizontalOptions="Center" />
+
+            <Label 
+                Text="{Binding TotalDistance}"
+                FontSize="18"
+                FontAttributes="Bold"
+                x:Name="DistanceLabel"
+                HorizontalOptions="Center"/>
 
             <ListView ItemsSource="{Binding Positions}">
                 <ListView.ItemTemplate>
@@ -35,58 +46,28 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0"
                                        Text="{Binding Timestamp}"
+                                       FontAttributes="Bold"/>
+                                <Label Grid.Column="1"
+                                       Text="{Binding Latitude}"
+                                       FontAttributes="Bold"/>
+                                <Label Grid.Column="2"
+                                       Text="{Binding Longitude}"
+                                       FontAttributes="Bold"/>
+                                <Label Grid.Column="3"
+                                       Text="{Binding Distance}"
                                        FontAttributes="Bold"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-            <!--<Label 
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level1"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Label 
-                Text="Current count: 0"
-                FontSize="18"
-                FontAttributes="Bold"
-                x:Name="CounterLabel"
-                HorizontalOptions="Center" />-->
-
-            <!--<Button 
-                Text="Click me"
-                FontAttributes="Bold"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />-->
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                WidthRequest="250"
-                HeightRequest="310"
-                HorizontalOptions="Center" />
-
-            <Label 
-                Text="Lat: 0"
-                FontSize="18"
-                FontAttributes="Bold"
-                x:Name="LatLabel"
-                HorizontalOptions="Center" />
-
-            <Label 
-                Text="Long: 0"
-                FontSize="18"
-                FontAttributes="Bold"
-                x:Name="LongLabel"
-                HorizontalOptions="Center" />
 
         </VerticalStackLayout>
     </ScrollView>
