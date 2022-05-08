@@ -7,12 +7,46 @@
         <VerticalStackLayout Spacing="25" Padding="30">
 
             <Label 
-                Text="Hello, World!"
+                Text="Location History"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
 
-            <Label 
+            <Button 
+                Text="Start"
+                FontAttributes="Bold"
+                SemanticProperties.Hint="Starts location history"
+                Clicked="OnStartClicked"
+                HorizontalOptions="Center" />
+
+            <Button 
+                Text="Stop"
+                FontAttributes="Bold"
+                SemanticProperties.Hint="Stop location history"
+                Clicked="OnStopClicked"
+                HorizontalOptions="Center" />
+
+            <ListView ItemsSource="{Binding Positions}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       Text="{Binding Timestamp}"
+                                       FontAttributes="Bold"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--<Label 
                 Text="Welcome to .NET Multi-platform App UI"
                 SemanticProperties.HeadingLevel="Level1"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I"
@@ -24,20 +58,34 @@
                 FontSize="18"
                 FontAttributes="Bold"
                 x:Name="CounterLabel"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center" />-->
 
-            <Button 
+            <!--<Button 
                 Text="Click me"
                 FontAttributes="Bold"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center" />-->
 
             <Image
                 Source="dotnet_bot.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 WidthRequest="250"
                 HeightRequest="310"
+                HorizontalOptions="Center" />
+
+            <Label 
+                Text="Lat: 0"
+                FontSize="18"
+                FontAttributes="Bold"
+                x:Name="LatLabel"
+                HorizontalOptions="Center" />
+
+            <Label 
+                Text="Long: 0"
+                FontSize="18"
+                FontAttributes="Bold"
+                x:Name="LongLabel"
                 HorizontalOptions="Center" />
 
         </VerticalStackLayout>
